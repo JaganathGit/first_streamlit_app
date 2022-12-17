@@ -33,21 +33,3 @@ try:
   else:
     back_from_function = get_fruityvice_data(fruit_choice)
     streamlit.dataframe(back_from_function)
-    
-    
-    
-streamlit.stop()
-
-#import snowflake.connector
-
-my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
-my_cur = my_cnx.cursor()
-my_cur.execute("select * from fruit_load_list")
-my_data_row = my_cur.fetchall()
-streamlit.header("The fruit load list contains:")
-streamlit.dataframe(my_data_row)
-
-add_my_fruits = streamlit.text_input('What fruit would you like add?')
-streamlit.write('Thanks for adding ', add_my_fruits)
-
-my_cur.execute("insert into fruit_load_list values ('from streamlit')")
